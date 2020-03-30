@@ -178,6 +178,8 @@ func (self *MsgCompiler) getCSharpTypeStr(typename string, typeparams []string) 
 		return "byte"
 	case "string":
 		return "string"
+	case "int16":
+		return "short"
 	case "int32":
 		return "int"
 	case "int64":
@@ -209,6 +211,8 @@ func (self *MsgCompiler) makeCSharpMioStr(typename string, typeparams []string) 
 		return "Mio.Byte"
 	case "string":
 		return "Mio.String"
+	case "int16":
+		return "Mio.I16"
 	case "int32":
 		return "Mio.I32"
 	case "int64":
@@ -237,6 +241,8 @@ func (self *MsgCompiler) makeCSharpMioInstV2(typename string) string {
 		return "MIO_Byte.I"
 	case "string":
 		return "MIO_String.I"
+	case "int16":
+		return "MIO_I16.I"
 	case "int32":
 		return "MIO_I32.I"
 	case "int64":
@@ -270,6 +276,8 @@ func (self *MsgCompiler) makeCSharpMioGet(field *FieldSchema) string {
 		return fmt.Sprintf("obj.GetByte((int)E.%s)", field.FieldName)
 	case "string":
 		return fmt.Sprintf("obj.GetString((int)E.%s)", field.FieldName)
+	case "int16":
+		return fmt.Sprintf("obj.GetShort((int)E.%s)", field.FieldName)
 	case "int32":
 		return fmt.Sprintf("obj.GetInt((int)E.%s)", field.FieldName)
 	case "int64":
@@ -291,7 +299,7 @@ func isCollectionMap(typename string) bool {
 }
 func isSimplePrimitive(typename string) bool {
 	switch typename {
-	case "bytes", "bool", "byte", "string", "int32", "int64", "float", "double":
+	case "bytes", "bool", "byte", "string", "int16", "int32", "int64", "float", "double":
 		return true
 	}
 	return false
